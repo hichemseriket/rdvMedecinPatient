@@ -2,30 +2,29 @@ package hichem.rdvmedecinpatient.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.*;
 import java.util.Collection;
+import java.util.List;
 
+@Entity
 public class Patient {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer idPatient;
+    private int idPatient;
     private String nom;
     private String email;
     @OneToMany(mappedBy = "patient")
     @JsonIgnore
-    private Collection<RendezVous> rendezVous;
+    private List<Rendezvous> rendezvous;
 
     public Patient() {
     }
 
-    public Patient(Integer idPatient, String nom, String email, Collection<RendezVous> rendezVous) {
+    public Patient(Integer idPatient, String nom, String email, List<Rendezvous> rendezvous) {
         this.idPatient = idPatient;
         this.nom = nom;
         this.email = email;
-        this.rendezVous = rendezVous;
+        this.rendezvous = rendezvous;
     }
 
     public Integer getIdPatient() {
@@ -52,21 +51,21 @@ public class Patient {
         this.email = email;
     }
 
-    public Collection<RendezVous> getRendezVous() {
-        return rendezVous;
+    public List<Rendezvous> getRendezvous() {
+        return rendezvous;
     }
 
-    public void setRendezVous(Collection<RendezVous> rendezVous) {
-        this.rendezVous = rendezVous;
+    public void setRendezvous(List<Rendezvous> rendezVous) {
+        this.rendezvous = rendezVous;
     }
 
-//    @Override
-//    public String toString() {
-//        return "Patient{" +
-//                "id=" + idPatient +
-//                ", nom='" + nom + '\'' +
-//                ", email='" + email + '\'' +
-//                ", rendezVous=" + rendezVous +
-//                '}';
-//    }
+    @Override
+    public String toString() {
+        return "Patient{" +
+                "id=" + idPatient +
+                ", nom='" + nom + '\'' +
+                ", email='" + email + '\'' +
+                ", rendezVous=" + rendezvous +
+                '}';
+    }
 }

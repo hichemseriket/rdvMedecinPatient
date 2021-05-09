@@ -1,33 +1,30 @@
 package hichem.rdvmedecinpatient.entity;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.*;
 import java.util.Collection;
+import java.util.List;
 
+@Entity
 public class Medecin {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer idMedecin;
+    private int idMedecin;
     private String nom;
     private String specialite;
     private String email;
     @OneToMany(mappedBy = "medecin")
-    @JsonIgnore
-    private Collection<RendezVous> rendezVous;
+//    @JsonIgnore
+    private List<Rendezvous> rendezvous;
 
     public Medecin() {
     }
 
-    public Medecin(Integer idMedecin, String nom, String specialite, String email, Collection<RendezVous> rendezVous) {
+    public Medecin(Integer idMedecin, String nom, String specialite, String email, List<Rendezvous> rendezvous) {
         this.idMedecin = idMedecin;
         this.nom = nom;
         this.specialite = specialite;
         this.email = email;
-        this.rendezVous = rendezVous;
+        this.rendezvous = rendezvous;
     }
 
     public Integer getIdMedecin() {
@@ -62,22 +59,22 @@ public class Medecin {
         this.email = email;
     }
 
-    public Collection<RendezVous> getRendezVous() {
-        return rendezVous;
+    public List<Rendezvous> getRendezvous() {
+        return rendezvous;
     }
 
-    public void setRendezVous(Collection<RendezVous> rendezVous) {
-        this.rendezVous = rendezVous;
+    public void setRendezvous(List<Rendezvous> rendezVous) {
+        this.rendezvous = rendezVous;
     }
 
-//    @Override
-//    public String toString() {
-//        return "Medecin{" +
-//                "id=" + idMedecin +
-//                ", nom='" + nom + '\'' +
-//                ", specialite='" + specialite + '\'' +
-//                ", email='" + email + '\'' +
-//                ", rendezVous=" + rendezVous +
-//                '}';
-//    }
+    @Override
+    public String toString() {
+        return "Medecin{" +
+                "id=" + idMedecin +
+                ", nom='" + nom + '\'' +
+                ", specialite='" + specialite + '\'' +
+                ", email='" + email + '\'' +
+                ", rendezVous=" + rendezvous +
+                '}';
+    }
 }

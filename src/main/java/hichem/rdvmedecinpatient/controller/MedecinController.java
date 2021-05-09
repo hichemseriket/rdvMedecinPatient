@@ -1,6 +1,7 @@
 package hichem.rdvmedecinpatient.controller;
 
 import hichem.rdvmedecinpatient.dao.MedecinDAO;
+import hichem.rdvmedecinpatient.dao.PatientDAO;
 import hichem.rdvmedecinpatient.entity.Medecin;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -17,8 +18,13 @@ import java.util.List;
 @RestController
 @CrossOrigin(origins = "*")
 public class MedecinController {
+
+    public MedecinController(MedecinDAO medecinDAO) {
+        this.medecinDAO = medecinDAO;
+    }
+
     @Autowired
-    private MedecinDAO medecinDAO;
+    private final MedecinDAO medecinDAO;
 
     @ApiOperation(value = "affiche la liste de tout les medecins")
     @RequestMapping(value="/medecin", method= RequestMethod.GET)

@@ -1,45 +1,50 @@
 package hichem.rdvmedecinpatient.entity;
 
 import javax.persistence.*;
-import java.util.Date;
 
-public class RendezVous {
+@Entity
+public class Rendezvous {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer idRendezVous;
-    private Date dateRendezVous;
+    @Column(nullable = true)
+    private Integer idRendezvous;
+    private String dateRendezvous;
+
     @ManyToOne
     private Medecin medecin;
+
     @ManyToOne
     private Patient patient;
-    @OneToOne
+
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name="CONSULTATION_ID_CONSULTATION", nullable=true)
     private Consultation consultation;
 
-    public RendezVous() {
+    public Rendezvous() {
     }
 
-    public RendezVous(Integer idRendezVous, Date dateRendezVous, Medecin medecin, Patient patient, Consultation consultation) {
-        this.idRendezVous = idRendezVous;
-        this.dateRendezVous = dateRendezVous;
+    public Rendezvous(Integer idRendezvous, String dateRendezvous, Medecin medecin, Patient patient, Consultation consultation) {
+        this.idRendezvous = idRendezvous;
+        this.dateRendezvous = dateRendezvous;
         this.medecin = medecin;
         this.patient = patient;
         this.consultation = consultation;
     }
 
-    public Integer getIdRendezVous() {
-        return idRendezVous;
+    public Integer getIdRendezvous() {
+        return idRendezvous;
     }
 
-    public void setIdRendezVous(Integer idRendezVous) {
-        this.idRendezVous = idRendezVous;
+    public void setIdRendezvous(Integer idRendezVous) {
+        this.idRendezvous = idRendezVous;
     }
 
-    public Date getDateRendezVous() {
-        return dateRendezVous;
+    public String getDateRendezvous() {
+        return dateRendezvous;
     }
 
-    public void setDateRendezVous(Date dateRendezVous) {
-        this.dateRendezVous = dateRendezVous;
+    public void setDateRendezvous(String dateRendezVous) {
+        this.dateRendezvous = dateRendezVous;
     }
 
     public Medecin getMedecin() {
@@ -66,11 +71,13 @@ public class RendezVous {
         this.consultation = consultation;
     }
 
-    //    @Override
+//    @Override
 //    public String toString() {
 //        return "RendezVous{" +
-//                "id=" + id +
+//                "idRendezVous=" + idRendezVous +
 //                ", dateRendezVous=" + dateRendezVous +
+//                ", medecin=" + medecin +
+//                ", patient=" + patient +
 //                ", consultation=" + consultation +
 //                '}';
 //    }

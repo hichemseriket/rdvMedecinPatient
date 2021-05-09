@@ -1,30 +1,33 @@
 package hichem.rdvmedecinpatient.entity;
 
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.OneToOne;
-import java.util.Date;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
+import javax.persistence.*;
+
+import static javax.persistence.CascadeType.ALL;
+
+@Entity
 public class Consultation {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer idConsultation;
-    private Date dateConsultation;
+    private String dateConsultation;
     private String rapportConsultation;
     private Double prixConsultation;
-    @OneToOne(mappedBy = "consultation")
-    private RendezVous rendezVous;
+    @OneToOne(cascade=ALL,mappedBy = "consultation")
+    @JsonIgnore
+    @JoinColumn(name = "RENDEZVOUS_ID_RENDEZVOUS")
+    private Rendezvous rendezvous;
 
     public Consultation() {
     }
 
-    public Consultation(Integer idConsultation, Date dateConsultation, String rapportConsultation, Double prixConsultation, RendezVous rendezVous) {
+    public Consultation(Integer idConsultation, String dateConsultation, String rapportConsultation, Double prixConsultation, Rendezvous rendezvous) {
         this.idConsultation = idConsultation;
         this.dateConsultation = dateConsultation;
         this.rapportConsultation = rapportConsultation;
         this.prixConsultation = prixConsultation;
-        this.rendezVous = rendezVous;
+        this.rendezvous = rendezvous;
     }
 
     public Integer getIdConsultation() {
@@ -35,11 +38,11 @@ public class Consultation {
         this.idConsultation = idConsultation;
     }
 
-    public Date getDateConsultation() {
+    public String getDateConsultation() {
         return dateConsultation;
     }
 
-    public void setDateConsultation(Date dateConsultation) {
+    public void setDateConsultation(String dateConsultation) {
         this.dateConsultation = dateConsultation;
     }
 
@@ -59,21 +62,21 @@ public class Consultation {
         this.prixConsultation = prixConsultation;
     }
 
-    public RendezVous getRendezVous() {
-        return rendezVous;
+    public Rendezvous getRendezvous() {
+        return rendezvous;
     }
 
-    public void setRendezVous(RendezVous rendezVous) {
-        this.rendezVous = rendezVous;
+    public void setRendezvous(Rendezvous rendezVous) {
+        this.rendezvous = rendezVous;
     }
 
-//    @Override
-//    public String toString() {
-//        return "Consultation{" +
-//                "id=" + idConsultation +
-//                ", dateConsultation=" + dateConsultation +
-//                ", rapportConsultation='" + rapportConsultation + '\'' +
-//                ", prixConsultation=" + prixConsultation +
-//                '}';
-//    }
+    @Override
+    public String toString() {
+        return "Consultation{" +
+                "id=" + idConsultation +
+                ", dateConsultation=" + dateConsultation +
+                ", rapportConsultation='" + rapportConsultation + '\'' +
+                ", prixConsultation=" + prixConsultation +
+                '}';
+    }
 }

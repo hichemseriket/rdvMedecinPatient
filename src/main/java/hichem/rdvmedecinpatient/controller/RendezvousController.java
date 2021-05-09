@@ -1,6 +1,6 @@
 package hichem.rdvmedecinpatient.controller;
-import hichem.rdvmedecinpatient.dao.RendezVousDAO;
-import hichem.rdvmedecinpatient.entity.RendezVous;
+import hichem.rdvmedecinpatient.dao.RendezvousDAO;
+import hichem.rdvmedecinpatient.entity.Rendezvous;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,17 +15,17 @@ import java.util.List;
 @Api(description = " Gestion des RDV CONSULTATION")
 @RestController
 @CrossOrigin(origins = "*")
-public class RendezVousController {
+public class RendezvousController {
     @Autowired
-    private RendezVousDAO rendezVousDAO;
+    private RendezvousDAO rendezvousDAO;
 
     @ApiOperation(value = "affiche la liste de tout les rdv")
     @RequestMapping(value="/rdv", method= RequestMethod.GET)
     public List<String> listeRdv() {
         List<String> valeur = new ArrayList<>();
-        List<RendezVous> rendezVous = rendezVousDAO.findAll();
-        for (RendezVous rendezVous1 : rendezVous){
-            valeur.add(rendezVous1.getConsultation().getRapportConsultation());
+        List<Rendezvous> rendezvous = rendezvousDAO.findAll();
+        for (Rendezvous rendezvous1 : rendezvous){
+            valeur.add(rendezvous1.getConsultation().getRapportConsultation());
         }
         return valeur;
     }
@@ -34,20 +34,20 @@ public class RendezVousController {
     @ApiOperation(value = "Réecupère un rdv selon son ID")
     @GetMapping(value = "/rdv/{id}")
     public double afficherUnRdv(@PathVariable int id){
-        RendezVous rendezVous = rendezVousDAO.findByIdRdv(id);
-        return rendezVous.getIdRendezVous();
+        Rendezvous rendezvous = rendezvousDAO.findByIdRendezvous(id);
+        return rendezvous.getIdRendezvous();
     }
 
 
     //ajouter une note
     @ApiOperation(value = "Permet d'ajouter un rdv a la liste des rdv")
     @PostMapping(value = "/rdv")
-    public ResponseEntity<Void> ajouterRdv(@RequestBody RendezVous rendezVous) {
-        RendezVous rendezVous1 = rendezVousDAO.save(rendezVous);
+    public ResponseEntity<Void> ajouterRdv(@RequestBody Rendezvous rendezvous) {
+        Rendezvous rendezvous1 = rendezvousDAO.save(rendezvous);
         URI location = ServletUriComponentsBuilder
                 .fromCurrentRequest()
                 .path("/{i}")
-                .buildAndExpand(rendezVous1.getConsultation())
+                .buildAndExpand(rendezvous1.getConsultation())
                 .toUri();
         return ResponseEntity.created(location).build();
 

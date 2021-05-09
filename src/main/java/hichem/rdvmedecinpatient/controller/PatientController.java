@@ -17,8 +17,13 @@ import java.util.List;
 @RestController
 @CrossOrigin(origins = "*")
 public class PatientController {
+
+    public PatientController(PatientDAO patientDAO) {
+        this.patientDAO = patientDAO;
+    }
+
     @Autowired
-    private PatientDAO patientDAO;
+    private final PatientDAO patientDAO;
 
 
     @ApiOperation(value = "affiche la liste de tout les patients")
