@@ -11,27 +11,34 @@ public class Rendezvous {
     private Integer idRendezvous;
     private String dateRendezvous;
 
-    @ManyToOne
-    private Medecin medecin;
+    @ManyToMany
+    private List<Medecin> medecin;
 
     @ManyToMany
     private List<Patient> patient;
 
-//    @ManyToMany(fetch = FetchType.LAZY)
-//    @JoinColumn(name="CONSULTATION_ID_CONSULTATION", nullable=true)
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinColumn(name="CONSULTATION_ID_CONSULTATION", nullable=true)
     private List<Consultation> consultation;
 
     public Rendezvous() {
     }
 
-    public Rendezvous(Integer idRendezvous, String dateRendezvous, Medecin medecin, List<Patient> patient, List<Consultation> consultation) {
+    public Rendezvous(Integer idRendezvous, String dateRendezvous, List<Medecin> medecin, List<Patient> patient, List<Consultation> consultation) {
         this.idRendezvous = idRendezvous;
         this.dateRendezvous = dateRendezvous;
         this.medecin = medecin;
         this.patient = patient;
         this.consultation = consultation;
     }
+
+    //    public Rendezvous(Integer idRendezvous, String dateRendezvous, Medecin medecin, List<Patient> patient, List<Consultation> consultation) {
+//        this.idRendezvous = idRendezvous;
+//        this.dateRendezvous = dateRendezvous;
+//        this.medecin = medecin;
+//        this.patient = patient;
+//        this.consultation = consultation;
+//    }
 
     public Integer getIdRendezvous() {
         return idRendezvous;
@@ -49,13 +56,21 @@ public class Rendezvous {
         this.dateRendezvous = dateRendezvous;
     }
 
-    public Medecin getMedecin() {
+    public List<Medecin> getMedecin() {
         return medecin;
     }
 
-    public void setMedecin(Medecin medecin) {
+    public void setMedecin(List<Medecin> medecin) {
         this.medecin = medecin;
     }
+    //
+//    public Medecin getMedecin() {
+//        return medecin;
+//    }
+//
+//    public void setMedecin(Medecin medecin) {
+//        this.medecin = medecin;
+//    }
 
     public List<Patient> getPatient() {
         return patient;

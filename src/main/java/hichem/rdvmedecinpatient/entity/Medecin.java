@@ -1,5 +1,7 @@
 package hichem.rdvmedecinpatient.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.util.Collection;
 import java.util.List;
@@ -12,8 +14,8 @@ public class Medecin {
     private String nom;
     private String specialite;
     private String email;
-    @OneToMany(mappedBy = "medecin")
-//    @JsonIgnore
+    @ManyToMany(mappedBy = "medecin")
+    @JsonIgnore
     private List<Rendezvous> rendezvous;
 
     public Medecin() {
