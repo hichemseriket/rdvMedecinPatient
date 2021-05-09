@@ -25,7 +25,7 @@ public class RendezvousController {
         List<String> valeur = new ArrayList<>();
         List<Rendezvous> rendezvous = rendezvousDAO.findAll();
         for (Rendezvous rendezvous1 : rendezvous){
-            valeur.add(rendezvous1.getConsultation().getRapportConsultation());
+            valeur.add(rendezvous1.getDateRendezvous());
         }
         return valeur;
     }

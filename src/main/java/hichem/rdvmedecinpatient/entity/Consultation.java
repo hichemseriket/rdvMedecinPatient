@@ -4,6 +4,8 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
 
+import java.util.List;
+
 import static javax.persistence.CascadeType.ALL;
 
 @Entity
@@ -14,15 +16,15 @@ public class Consultation {
     private String dateConsultation;
     private String rapportConsultation;
     private Double prixConsultation;
-    @OneToOne(cascade=ALL,mappedBy = "consultation")
+    @ManyToMany(cascade=ALL,mappedBy = "consultation")
     @JsonIgnore
-    @JoinColumn(name = "RENDEZVOUS_ID_RENDEZVOUS")
-    private Rendezvous rendezvous;
+//    @JoinColumn(name = "RENDEZVOUS_ID_RENDEZVOUS", nullable=true)
+    private List<Rendezvous> rendezvous;
 
     public Consultation() {
     }
 
-    public Consultation(Integer idConsultation, String dateConsultation, String rapportConsultation, Double prixConsultation, Rendezvous rendezvous) {
+    public Consultation(Integer idConsultation, String dateConsultation, String rapportConsultation, Double prixConsultation, List<Rendezvous> rendezvous) {
         this.idConsultation = idConsultation;
         this.dateConsultation = dateConsultation;
         this.rapportConsultation = rapportConsultation;
@@ -62,12 +64,12 @@ public class Consultation {
         this.prixConsultation = prixConsultation;
     }
 
-    public Rendezvous getRendezvous() {
+    public List<Rendezvous> getRendezvous() {
         return rendezvous;
     }
 
-    public void setRendezvous(Rendezvous rendezVous) {
-        this.rendezvous = rendezVous;
+    public void setRendezvous(List<Rendezvous> rendezvous) {
+        this.rendezvous = rendezvous;
     }
 
     @Override

@@ -1,6 +1,7 @@
 package hichem.rdvmedecinpatient.entity;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 public class Rendezvous {
@@ -13,17 +14,18 @@ public class Rendezvous {
     @ManyToOne
     private Medecin medecin;
 
-    @ManyToOne
-    private Patient patient;
+    @ManyToMany
+    private List<Patient> patient;
 
-    @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name="CONSULTATION_ID_CONSULTATION", nullable=true)
-    private Consultation consultation;
+//    @ManyToMany(fetch = FetchType.LAZY)
+//    @JoinColumn(name="CONSULTATION_ID_CONSULTATION", nullable=true)
+    @ManyToMany
+    private List<Consultation> consultation;
 
     public Rendezvous() {
     }
 
-    public Rendezvous(Integer idRendezvous, String dateRendezvous, Medecin medecin, Patient patient, Consultation consultation) {
+    public Rendezvous(Integer idRendezvous, String dateRendezvous, Medecin medecin, List<Patient> patient, List<Consultation> consultation) {
         this.idRendezvous = idRendezvous;
         this.dateRendezvous = dateRendezvous;
         this.medecin = medecin;
@@ -35,16 +37,16 @@ public class Rendezvous {
         return idRendezvous;
     }
 
-    public void setIdRendezvous(Integer idRendezVous) {
-        this.idRendezvous = idRendezVous;
+    public void setIdRendezvous(Integer idRendezvous) {
+        this.idRendezvous = idRendezvous;
     }
 
     public String getDateRendezvous() {
         return dateRendezvous;
     }
 
-    public void setDateRendezvous(String dateRendezVous) {
-        this.dateRendezvous = dateRendezVous;
+    public void setDateRendezvous(String dateRendezvous) {
+        this.dateRendezvous = dateRendezvous;
     }
 
     public Medecin getMedecin() {
@@ -55,30 +57,30 @@ public class Rendezvous {
         this.medecin = medecin;
     }
 
-    public Patient getPatient() {
+    public List<Patient> getPatient() {
         return patient;
     }
 
-    public void setPatient(Patient patient) {
+    public void setPatient(List<Patient> patient) {
         this.patient = patient;
     }
 
-    public Consultation getConsultation() {
+    public List<Consultation> getConsultation() {
         return consultation;
     }
 
-    public void setConsultation(Consultation consultation) {
+    public void setConsultation(List<Consultation> consultation) {
         this.consultation = consultation;
     }
 
-//    @Override
-//    public String toString() {
-//        return "RendezVous{" +
-//                "idRendezVous=" + idRendezVous +
-//                ", dateRendezVous=" + dateRendezVous +
-//                ", medecin=" + medecin +
-//                ", patient=" + patient +
-//                ", consultation=" + consultation +
-//                '}';
-//    }
+    @Override
+    public String toString() {
+        return "Rendezvous{" +
+                "idRendezvous=" + idRendezvous +
+                ", dateRendezvous='" + dateRendezvous + '\'' +
+                ", medecin=" + medecin +
+                ", patient=" + patient +
+                ", consultation=" + consultation +
+                '}';
+    }
 }

@@ -13,7 +13,7 @@ public class Patient {
     private int idPatient;
     private String nom;
     private String email;
-    @OneToMany(mappedBy = "patient")
+    @ManyToMany(mappedBy = "patient")
     @JsonIgnore
     private List<Rendezvous> rendezvous;
 
