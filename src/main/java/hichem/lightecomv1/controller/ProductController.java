@@ -31,7 +31,7 @@ public class ProductController {
         List<String> valeur = new ArrayList<>();
         List<Product> product = productDAO.findAll();
         for (Product product1 : product){
-            valeur.add(product1.getNom());
+            valeur.add(product1.toString());
         }
         return valeur;
     }
@@ -41,7 +41,7 @@ public class ProductController {
     public String afficherUnProduct(@PathVariable int id) {
         Product product = productDAO.findByIdProduct(id);
 //        return product.getNom().hashCode();
-        return product.getNom();
+        return product.getName();
     }
 
     //ajouter un Product
@@ -52,7 +52,7 @@ public class ProductController {
         URI location = ServletUriComponentsBuilder
                 .fromCurrentRequest()
                 .path("/{i}")
-                .buildAndExpand(product1.getNom())
+                .buildAndExpand(product1.toString())
                 .toUri();
         return ResponseEntity.created(location).build();
 

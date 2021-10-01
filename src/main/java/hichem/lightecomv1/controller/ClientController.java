@@ -25,7 +25,7 @@ public class ClientController {
         List<String> valeur = new ArrayList<>();
         List<Client> clients = clientDAO.findAll();
         for (Client client1 : clients){
-            valeur.add(client1.getDateClient());
+            valeur.add(client1.toString());
         }
         return valeur;
     }
@@ -47,7 +47,7 @@ public class ClientController {
         URI location = ServletUriComponentsBuilder
                 .fromCurrentRequest()
                 .path("/{i}")
-                .buildAndExpand(client1.getCategory())
+                .buildAndExpand(client1.toString())
                 .toUri();
         return ResponseEntity.created(location).build();
 
