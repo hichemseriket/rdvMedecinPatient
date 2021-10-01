@@ -25,7 +25,7 @@ public class CategoryController {
         List<String> valeur = new ArrayList<>();
         List<Category> category = categoryDAO.findAll();
         for (Category category1 : category){
-            valeur.add(category1.getRapportCategory());
+            valeur.add(category1.toString());
         }
         return valeur;
     }
@@ -46,7 +46,7 @@ public class CategoryController {
         URI location = ServletUriComponentsBuilder
                 .fromCurrentRequest()
                 .path("/{i}")
-                .buildAndExpand(category1.getRapportCategory())
+                .buildAndExpand(category1.getDescription())
                 .toUri();
         return ResponseEntity.created(location).build();
 

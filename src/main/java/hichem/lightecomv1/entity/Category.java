@@ -15,18 +15,18 @@ import static javax.persistence.CascadeType.ALL;
 public class Category implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer idCategory;
+    private Long idCategory;
     private String name;
     private String photo;
     private String description;
-    @ManyToMany(cascade=ALL,mappedBy = "category")
-    @JsonIgnore
+    @OneToMany(mappedBy = "category")
+//    @JsonIgnore
 //    @ToString.Exclude
     private Collection<Product> products;
     public Category() {
     }
 
-    public Category(Integer idCategory, String name, String photo, String description, Collection<Product> products) {
+    public Category(Long idCategory, String name, String photo, String description, Collection<Product> products) {
         this.idCategory = idCategory;
         this.name = name;
         this.photo = photo;
@@ -34,11 +34,11 @@ public class Category implements Serializable {
         this.products = products;
     }
 
-    public Integer getIdCategory() {
+    public Long getIdCategory() {
         return idCategory;
     }
 
-    public void setIdCategory(Integer idCategory) {
+    public void setIdCategory(Long idCategory) {
         this.idCategory = idCategory;
     }
 

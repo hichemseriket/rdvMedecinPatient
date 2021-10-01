@@ -1,70 +1,68 @@
 package hichem.lightecomv1.entity;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
 import javax.persistence.*;
-import java.util.List;
+import java.util.Date;
 
 @Entity
 public class Ordre {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int idOrdre;
-    private String nom;
-    private String email;
-    @ManyToMany(mappedBy = "ordre")
-    @JsonIgnore
-    private List<Client> clients;
+    private Long idOrdre;
+    private Date date;
+    @ManyToOne
+    private Client client;
+    private double totalAmount;
+
 
     public Ordre() {
     }
 
-    public Ordre(Integer idOrdre, String nom, String email, List<Client> clients) {
+    public Ordre(Long idOrdre, Date date, Client client, double totalAmount) {
         this.idOrdre = idOrdre;
-        this.nom = nom;
-        this.email = email;
-        this.clients = clients;
+        this.date = date;
+        this.client = client;
+        this.totalAmount = totalAmount;
     }
 
-    public Integer getIdOrdre() {
+    public Long getIdOrdre() {
         return idOrdre;
     }
 
-    public void setIdOrdre(Integer idOrdre) {
+    public void setIdOrdre(Long idOrdre) {
         this.idOrdre = idOrdre;
     }
 
-    public String getNom() {
-        return nom;
+    public Date getDate() {
+        return date;
     }
 
-    public void setNom(String nom) {
-        this.nom = nom;
+    public void setDate(Date date) {
+        this.date = date;
     }
 
-    public String getEmail() {
-        return email;
+    public Client getClient() {
+        return client;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
+    public void setClient(Client client) {
+        this.client = client;
     }
 
-    public List<Client> getRendezvous() {
-        return clients;
+    public double getTotalAmount() {
+        return totalAmount;
     }
 
-    public void setRendezvous(List<Client> rendezVous) {
-        this.clients = rendezVous;
+    public void setTotalAmount(double totalAmount) {
+        this.totalAmount = totalAmount;
     }
 
     @Override
     public String toString() {
         return "Ordre{" +
-                "id=" + idOrdre +
-                ", nom='" + nom + '\'' +
-                ", email='" + email + '\'' +
-                ", rendezVous=" + clients +
+                "idOrdre=" + idOrdre +
+                ", date=" + date +
+                ", client=" + client +
+                ", totalAmount=" + totalAmount +
                 '}';
     }
 }

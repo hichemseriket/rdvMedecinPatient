@@ -1,81 +1,150 @@
 package hichem.lightecomv1.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import org.hibernate.Hibernate;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.List;
+import java.util.Objects;
 
 @Entity
-public class Product {
+public class Product implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int idProduct;
-    private String nom;
-    private String specialite;
-    private String email;
-    @ManyToMany(mappedBy = "product")
-    @JsonIgnore
-    private List<Client> clients;
+    private Long idProduct;
+    private String name;
+    private String description;
+    private double currentPrice;
+    private boolean promotion;
+    private boolean selected;
+    private boolean available;
+    private String photoName;
+    @Transient
+    private int quantity=1;
+    @ManyToOne
+    private  Category category;
+//    @ManyToMany(mappedBy = "product")
+//    @JsonIgnore
+//    private List<Client> clients;
 
     public Product() {
     }
 
-    public Product(Integer idProduct, String nom, String specialite, String email, List<Client> clients) {
-        this.idProduct = idProduct;
-        this.nom = nom;
-        this.specialite = specialite;
-        this.email = email;
-        this.clients = clients;
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
+        Category category = (Category) o;
+        return Objects.equals(idProduct, category.getIdCategory());
     }
 
-    public Integer getIdProduct() {
+    public Product(Long idProduct, String name, String description, double currentPrice, boolean promotion, boolean selected, boolean available, String photoName, int quantity, Category category) {
+        this.idProduct = idProduct;
+        this.name = name;
+        this.description = description;
+        this.currentPrice = currentPrice;
+        this.promotion = promotion;
+        this.selected = selected;
+        this.available = available;
+        this.photoName = photoName;
+        this.quantity = quantity;
+        this.category = category;
+    }
+
+    public Long getIdProduct() {
         return idProduct;
     }
 
-    public void setIdProduct(Integer idProduct) {
+    public void setIdProduct(Long idProduct) {
         this.idProduct = idProduct;
     }
 
-    public String getNom() {
-        return nom;
+    public String getName() {
+        return name;
     }
 
-    public void setNom(String nom) {
-        this.nom = nom;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public String getSpecialite() {
-        return specialite;
+    public String getDescription() {
+        return description;
     }
 
-    public void setSpecialite(String specialite) {
-        this.specialite = specialite;
+    public void setDescription(String description) {
+        this.description = description;
     }
 
-    public String getEmail() {
-        return email;
+    public double getCurrentPrice() {
+        return currentPrice;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
+    public void setCurrentPrice(double currentPrice) {
+        this.currentPrice = currentPrice;
     }
 
-    public List<Client> getRendezvous() {
-        return clients;
+    public boolean isPromotion() {
+        return promotion;
     }
 
-    public void setRendezvous(List<Client> rendezVous) {
-        this.clients = rendezVous;
+    public void setPromotion(boolean promotion) {
+        this.promotion = promotion;
+    }
+
+    public boolean isSelected() {
+        return selected;
+    }
+
+    public void setSelected(boolean selected) {
+        this.selected = selected;
+    }
+
+    public boolean isAvailable() {
+        return available;
+    }
+
+    public void setAvailable(boolean available) {
+        this.available = available;
+    }
+
+    public String getPhotoName() {
+        return photoName;
+    }
+
+    public void setPhotoName(String photoName) {
+        this.photoName = photoName;
+    }
+
+    public int getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
+    }
+
+    public Category getCategory() {
+        return category;
+    }
+
+    public void setCategory(Category category) {
+        this.category = category;
     }
 
     @Override
     public String toString() {
         return "Product{" +
-                "id=" + idProduct +
-                ", nom='" + nom + '\'' +
-                ", specialite='" + specialite + '\'' +
-                ", email='" + email + '\'' +
-                ", rendezVous=" + clients +
+                "idProduct=" + idProduct +
+                ", name='" + name + '\'' +
+                ", description='" + description + '\'' +
+                ", currentPrice=" + currentPrice +
+                ", promotion=" + promotion +
+                ", selected=" + selected +
+                ", available=" + available +
+                ", photoName='" + photoName + '\'' +
+                ", quantity=" + quantity +
+                ", category=" + category +
                 '}';
     }
 }

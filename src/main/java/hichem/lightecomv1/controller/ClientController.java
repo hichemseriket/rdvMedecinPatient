@@ -25,7 +25,7 @@ public class ClientController {
         List<String> valeur = new ArrayList<>();
         List<Client> clients = clientDAO.findAll();
         for (Client client1 : clients){
-            valeur.add(client1.getDateClient());
+            valeur.add(client1.toString());
         }
         return valeur;
     }
@@ -41,13 +41,13 @@ public class ClientController {
 
     //ajouter une note
     @ApiOperation(value = "Permet d'ajouter un Client a la liste des Client")
-    @PostMapping(value = "/Client")
+    @PostMapping(value = "/client")
     public ResponseEntity<Void> ajouterClient(@RequestBody Client client) {
         Client client1 = clientDAO.save(client);
         URI location = ServletUriComponentsBuilder
                 .fromCurrentRequest()
                 .path("/{i}")
-                .buildAndExpand(client1.getCategory())
+                .buildAndExpand(client1.getUsername())
                 .toUri();
         return ResponseEntity.created(location).build();
 

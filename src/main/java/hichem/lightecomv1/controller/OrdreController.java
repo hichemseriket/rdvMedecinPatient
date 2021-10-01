@@ -32,7 +32,7 @@ public class OrdreController {
         List<String> valeur = new ArrayList<>();
         List<Ordre> ordre = ordreDAO.findAll();
         for (Ordre ordre1 : ordre){
-            valeur.add(ordre1.getNom());
+            valeur.add(ordre1.toString());
         }
         return valeur;
     }
@@ -42,7 +42,7 @@ public class OrdreController {
     @GetMapping(value = "/ordre/{id}")
     public double afficherUnOrdre(@PathVariable int id) {
         Ordre ordre = ordreDAO.findByIdOrdre(id);
-        return ordre.getNom().hashCode();
+        return ordre.getTotalAmount();
     }
 
     //ajouter un Ordre
@@ -53,7 +53,7 @@ public class OrdreController {
         URI location = ServletUriComponentsBuilder
                 .fromCurrentRequest()
                 .path("/{i}")
-                .buildAndExpand(ordre1.getNom())
+                .buildAndExpand(ordre1.getIdOrdre())
                 .toUri();
         return ResponseEntity.created(location).build();
 
