@@ -3,7 +3,6 @@ package hichem.lightecomv1.entity;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import javax.persistence.*;
-import java.util.Date;
 
 @Entity
 public class Payment {
@@ -15,17 +14,17 @@ public class Payment {
     private String cardType;
     @OneToOne(mappedBy = "payment")
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
-    private hichem.lightecomv1.entity.Order order;
+    private Ordere ordere;
 
     public Payment() {
     }
 
-    public Payment(Long id, String datePayment, long cardNumber, String cardType, Order order) {
+    public Payment(Long id, String datePayment, long cardNumber, String cardType, Ordere ordere) {
         this.id = id;
         this.datePayment = datePayment;
         this.cardNumber = cardNumber;
         this.cardType = cardType;
-        this.order = order;
+        this.ordere = ordere;
     }
 
     public Long getId() {
@@ -60,12 +59,12 @@ public class Payment {
         this.cardType = cardType;
     }
 
-    public Order getOrder() {
-        return order;
+    public Ordere getOrder() {
+        return ordere;
     }
 
-    public void setOrder(Order order) {
-        this.order = order;
+    public void setOrder(Ordere ordere) {
+        this.ordere = ordere;
     }
 
     @Override
@@ -75,7 +74,7 @@ public class Payment {
                 ", datePayment='" + datePayment + '\'' +
                 ", cardNumber=" + cardNumber +
                 ", cardType='" + cardType + '\'' +
-                ", order=" + order +
+                ", order=" + ordere +
                 '}';
     }
 }

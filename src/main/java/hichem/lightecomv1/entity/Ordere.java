@@ -1,14 +1,10 @@
 package hichem.lightecomv1.entity;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
 import javax.persistence.*;
 import java.util.Collection;
-import java.util.Date;
-import java.util.List;
 
 @Entity
-public class Order {
+public class Ordere {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idOrder;
@@ -19,23 +15,23 @@ public class Order {
 //    private List<Client> clients;
 //    private Date date;
     private String date;
-    @OneToMany(mappedBy = "order")
+    @OneToMany(mappedBy = "ordere")
     private Collection<OrderItem> orderItems;
     @ManyToOne
     private Client client;
-    private double totalAmount;
+//    private double totalAmount;
     @OneToOne
     private Payment payment;
 
-    public Order() {
+    public Ordere() {
     }
 
-    public Order(Long idOrder, String date, Collection<OrderItem> orderItems, Client client, double totalAmount, Payment payment) {
+    public Ordere(Long idOrder, String date, Collection<OrderItem> orderItems, Client client, double totalAmount, Payment payment) {
         this.idOrder = idOrder;
         this.date = date;
         this.orderItems = orderItems;
         this.client = client;
-        this.totalAmount = totalAmount;
+//        this.totalAmount = totalAmount;
         this.payment = payment;
     }
 
@@ -71,13 +67,13 @@ public class Order {
         this.client = client;
     }
 
-    public double getTotalAmount() {
-        return totalAmount;
-    }
-
-    public void setTotalAmount(double totalAmount) {
-        this.totalAmount = totalAmount;
-    }
+//    public double getTotalAmount() {
+//        return totalAmount;
+//    }
+//
+//    public void setTotalAmount(double totalAmount) {
+//        this.totalAmount = totalAmount;
+//    }
 
     public Payment getPayment() {
         return payment;
@@ -94,7 +90,7 @@ public class Order {
                 ", date=" + date +
                 ", orderItems=" + orderItems +
                 ", client=" + client +
-                ", totalAmount=" + totalAmount +
+//                ", totalAmount=" + totalAmount +
                 ", payment=" + payment +
                 '}';
     }

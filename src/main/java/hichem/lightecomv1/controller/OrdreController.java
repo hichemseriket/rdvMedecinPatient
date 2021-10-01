@@ -1,7 +1,7 @@
 package hichem.lightecomv1.controller;
 
 import hichem.lightecomv1.dao.OrdreDAO;
-import hichem.lightecomv1.entity.Order;
+import hichem.lightecomv1.entity.Ordere;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,9 +30,9 @@ public class OrdreController {
     @RequestMapping(value="/ordre", method= RequestMethod.GET)
     public List<String> listeOrdre() {
         List<String> valeur = new ArrayList<>();
-        List<Order> order = ordreDAO.findAll();
-        for (Order order1 : order){
-            valeur.add(order1.toString());
+        List<Ordere> ordere = ordreDAO.findAll();
+        for (Ordere ordere1 : ordere){
+            valeur.add(ordere1.toString());
         }
         return valeur;
     }
@@ -41,19 +41,19 @@ public class OrdreController {
     @ApiOperation(value = "Réecupère un Ordre selon son ID")
     @GetMapping(value = "/ordre/{id}")
     public double afficherUnOrdre(@PathVariable int id) {
-        Order order = ordreDAO.findByIdOrdre(id);
-        return order.toString().hashCode();
+        Ordere ordere = ordreDAO.findByIdOrdre(id);
+        return ordere.toString().hashCode();
     }
 
     //ajouter un Ordre
     @ApiOperation(value = "Permet d'ajouter un Ordre a la liste des Ordres")
     @PostMapping(value = "/ordre")
-    public ResponseEntity<Void> ajouterOrdre(@RequestBody Order order) {
-        Order order1 = ordreDAO.save(order);
+    public ResponseEntity<Void> ajouterOrdre(@RequestBody Ordere ordere) {
+        Ordere ordere1 = ordreDAO.save(ordere);
         URI location = ServletUriComponentsBuilder
                 .fromCurrentRequest()
                 .path("/{i}")
-                .buildAndExpand(order1.toString())
+                .buildAndExpand(ordere1.toString())
                 .toUri();
         return ResponseEntity.created(location).build();
 

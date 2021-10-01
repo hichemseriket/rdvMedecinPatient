@@ -14,17 +14,17 @@ public class OrderItem {
     private double price;
     @ManyToOne
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
-    private Order order;
+    private Ordere ordere;
 
     public OrderItem() {
     }
 
-    public OrderItem(Long id, Product product, int quantity, double price, Order order) {
+    public OrderItem(Long id, Product product, int quantity, double price, Ordere ordere) {
         this.id = id;
         this.product = product;
         this.quantity = quantity;
         this.price = price;
-        this.order = order;
+        this.ordere = ordere;
     }
 
     public Long getId() {
@@ -59,12 +59,12 @@ public class OrderItem {
         this.price = price;
     }
 
-    public Order getOrder() {
-        return order;
+    public Ordere getOrder() {
+        return ordere;
     }
 
-    public void setOrder(Order order) {
-        this.order = order;
+    public void setOrder(Ordere ordere) {
+        this.ordere = ordere;
     }
 
     @Override
@@ -74,7 +74,7 @@ public class OrderItem {
                 ", product=" + product +
                 ", quantity=" + quantity +
                 ", price=" + price +
-                ", order=" + order +
+                ", order=" + ordere +
                 '}';
     }
 }
