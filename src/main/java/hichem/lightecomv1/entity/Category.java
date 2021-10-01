@@ -1,35 +1,37 @@
 package hichem.lightecomv1.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import lombok.ToString;
 
 import javax.persistence.*;
 
+import java.io.Serializable;
+import java.util.Collection;
 import java.util.List;
 
 import static javax.persistence.CascadeType.ALL;
 
 @Entity
-public class Category {
+public class Category implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer idCategory;
-    private String dateCategory;
-    private String rapportCategory;
-    private Double prixCategory;
+    private String name;
+    private String photo;
+    private String description;
     @ManyToMany(cascade=ALL,mappedBy = "category")
     @JsonIgnore
-//    @JoinColumn(name = "RENDEZVOUS_ID_RENDEZVOUS", nullable=true)
-    private List<Client> clients;
-
+//    @ToString.Exclude
+    private Collection<Product> products;
     public Category() {
     }
 
-    public Category(Integer idCategory, String dateCategory, String rapportCategory, Double prixCategory, List<Client> clients) {
+    public Category(Integer idCategory, String name, String photo, String description, Collection<Product> products) {
         this.idCategory = idCategory;
-        this.dateCategory = dateCategory;
-        this.rapportCategory = rapportCategory;
-        this.prixCategory = prixCategory;
-        this.clients = clients;
+        this.name = name;
+        this.photo = photo;
+        this.description = description;
+        this.products = products;
     }
 
     public Integer getIdCategory() {
@@ -40,45 +42,45 @@ public class Category {
         this.idCategory = idCategory;
     }
 
-    public String getDateCategory() {
-        return dateCategory;
+    public String getName() {
+        return name;
     }
 
-    public void setDateCategory(String dateCategory) {
-        this.dateCategory = dateCategory;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public String getRapportCategory() {
-        return rapportCategory;
+    public String getPhoto() {
+        return photo;
     }
 
-    public void setRapportCategory(String rapportCategory) {
-        this.rapportCategory = rapportCategory;
+    public void setPhoto(String photo) {
+        this.photo = photo;
     }
 
-    public Double getPrixCategory() {
-        return prixCategory;
+    public String getDescription() {
+        return description;
     }
 
-    public void setPrixCategory(Double prixCategory) {
-        this.prixCategory = prixCategory;
+    public void setDescription(String description) {
+        this.description = description;
     }
 
-    public List<Client> getRendezvous() {
-        return clients;
+    public Collection<Product> getProducts() {
+        return products;
     }
 
-    public void setRendezvous(List<Client> clients) {
-        this.clients = clients;
+    public void setProducts(Collection<Product> products) {
+        this.products = products;
     }
 
     @Override
     public String toString() {
         return "Category{" +
                 "id=" + idCategory +
-                ", dateCategory=" + dateCategory +
-                ", rapportCategory='" + rapportCategory + '\'' +
-                ", prixCategory=" + prixCategory +
+                ", name=" + name +
+                ", photo='" + photo + '\'' +
+                ", description=" + description +
                 '}';
     }
 }
