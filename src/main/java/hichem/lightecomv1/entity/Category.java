@@ -19,7 +19,7 @@ public class Category implements Serializable {
     private String name;
     private String photo;
     private String description;
-    @ManyToMany(cascade=ALL,mappedBy = "category")
+    @OneToMany(cascade=ALL,mappedBy = "category")
     @JsonIgnore
 //    @ToString.Exclude
     private Collection<Product> products;

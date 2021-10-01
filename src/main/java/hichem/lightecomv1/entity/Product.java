@@ -16,6 +16,8 @@ public class Product {
     @ManyToMany(mappedBy = "product")
     @JsonIgnore
     private List<Client> clients;
+    @ManyToOne
+    private  Category category;
 
     public Product() {
     }
