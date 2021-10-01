@@ -1,40 +1,39 @@
-package hichem.rdvmedecinpatient.entity;
+package hichem.lightecomv1.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
-import java.util.Collection;
 import java.util.List;
 
 @Entity
-public class Medecin {
+public class Product {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int idMedecin;
+    private int idProduct;
     private String nom;
     private String specialite;
     private String email;
-    @ManyToMany(mappedBy = "medecin")
+    @ManyToMany(mappedBy = "product")
     @JsonIgnore
-    private List<Rendezvous> rendezvous;
+    private List<Client> clients;
 
-    public Medecin() {
+    public Product() {
     }
 
-    public Medecin(Integer idMedecin, String nom, String specialite, String email, List<Rendezvous> rendezvous) {
-        this.idMedecin = idMedecin;
+    public Product(Integer idProduct, String nom, String specialite, String email, List<Client> clients) {
+        this.idProduct = idProduct;
         this.nom = nom;
         this.specialite = specialite;
         this.email = email;
-        this.rendezvous = rendezvous;
+        this.clients = clients;
     }
 
-    public Integer getIdMedecin() {
-        return idMedecin;
+    public Integer getIdProduct() {
+        return idProduct;
     }
 
-    public void setIdMedecin(Integer idMedecin) {
-        this.idMedecin = idMedecin;
+    public void setIdProduct(Integer idProduct) {
+        this.idProduct = idProduct;
     }
 
     public String getNom() {
@@ -61,22 +60,22 @@ public class Medecin {
         this.email = email;
     }
 
-    public List<Rendezvous> getRendezvous() {
-        return rendezvous;
+    public List<Client> getRendezvous() {
+        return clients;
     }
 
-    public void setRendezvous(List<Rendezvous> rendezVous) {
-        this.rendezvous = rendezVous;
+    public void setRendezvous(List<Client> rendezVous) {
+        this.clients = rendezVous;
     }
 
     @Override
     public String toString() {
-        return "Medecin{" +
-                "id=" + idMedecin +
+        return "Product{" +
+                "id=" + idProduct +
                 ", nom='" + nom + '\'' +
                 ", specialite='" + specialite + '\'' +
                 ", email='" + email + '\'' +
-                ", rendezVous=" + rendezvous +
+                ", rendezVous=" + clients +
                 '}';
     }
 }

@@ -1,12 +1,12 @@
-package hichem.rdvmedecinpatient;
+package hichem.lightecomv1;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class RdvMedecinPatientApplication {
+public class LightEcomV1Application {
 
     public static void main(String[] args) {
-        SpringApplication.run(RdvMedecinPatientApplication.class, args);
+        SpringApplication.run(LightEcomV1Application.class, args);
     }
 }

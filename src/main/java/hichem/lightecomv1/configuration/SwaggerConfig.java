@@ -1,4 +1,4 @@
-package hichem.rdvmedecinpatient.configuration;
+package hichem.lightecomv1.configuration;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
