@@ -38,9 +38,10 @@ public class ProductController {
     //Récupérer un Product par son Id
     @ApiOperation(value = "Réecupère un Product selon son ID")
     @GetMapping(value = "/product/{id}")
-    public double afficherUnProduct(@PathVariable int id) {
+    public String afficherUnProduct(@PathVariable int id) {
         Product product = productDAO.findByIdProduct(id);
-        return product.getNom().hashCode();
+//        return product.getNom().hashCode();
+        return product.getNom();
     }
 
     //ajouter un Product

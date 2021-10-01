@@ -19,7 +19,7 @@ public class CategoryController {
     @Autowired
     private CategoryDAO categoryDAO;
 
-    @ApiOperation(value = "affiche la liste de toutes les consult")
+    @ApiOperation(value = "affiche la liste de toutes les categorie")
     @RequestMapping(value="/category", method= RequestMethod.GET)
     public List<String> listeCategory() {
         List<String> valeur = new ArrayList<>();
@@ -39,7 +39,7 @@ public class CategoryController {
     }
 
     //ajouter une Category
-    @ApiOperation(value = "Permet d'ajouter une consulatation a la liste des Category")
+    @ApiOperation(value = "Permet d'ajouter une categori a la liste des Category")
     @PostMapping(value = "/category")
     public ResponseEntity<Void> ajouterCategory(@RequestBody Category category) {
         Category category1 = categoryDAO.save(category);
